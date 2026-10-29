@@ -1,0 +1,77 @@
+# Konfiguracja OLX Hunter. Wartości wrażliwe (topic ntfy, klucz API) podaj przez zmienne środowiskowe
+# (patrz .env.example) - env nadpisuje to, co jest tutaj.
+
+olx:
+  base_url: https://www.olx.pl
+  # Odstęp między zapytaniami do OLX (sekundy) - nie katujemy API.
+  request_delay: 1.5
+  # Ile stron (po 40 ofert) pobierać dla każdego wyszukiwania.
+  max_pages: 2
+  # Ogłoszenia starsze niż tyle godzin są pomijane (0 = bez limitu).
+  max_age_hours: 72
+
+# Każde wyszukiwanie: query (fraza OLX), opcjonalnie widełki cenowe, słowa wymagane / wykluczone,
+# oraz "profile" referencyjne z rules.yaml, które pozwalają ocenić cenę.
+searches:
+  - name: Lenovo Tiny (8-10 gen)
+    query: lenovo tiny m720q m920q m920x m90q
+    price_min: 200
+    price_max: 1500
+    must_match_any: ["m720q", "m920q", "m920x", "m90q", "m70q", "m75q", "tiny"]
+  - name: Dell Micro / HP Mini
+    query: dell optiplex micro 7070 7080 7090 3080
+    price_min: 200
+    price_max: 1600
+    must_match_any: ["micro", "mini", "7070", "7080", "7090", "3080", "3090", "800 g4", "800 g5", "800 g6", "elitedesk"]
+  - name: HP EliteDesk Mini
+    query: hp elitedesk mini 800 g4 g5 g6
+    price_min: 200
+    price_max: 1500
+  - name: Procesory desktop (single-core)
+    query: i5-12400 i5-12600k i7-12700 ryzen 5 5600 ryzen 7 5700x
+    price_min: 150
+    price_max: 900
+    must_match_any: ["12400", "12600", "12700", "13600", "5600", "5700x", "5800x", "7600", "7700", "13400", "14600"]
+  - name: Karty graficzne
+    query: rtx 3060 3070 3080 rx 6700 6800
+    price_min: 400
+    price_max: 2500
+    must_match_any: ["rtx", "rx 6", "rx6"]
+  - name: Audio / wideo
+    query: shure sm7b rode procaster elgato cam link sony zv-e10
+    price_min: 150
+    price_max: 3500
+
+filters:
+  # Oferty z wynikiem heurystycznym poniżej progu nie są dalej analizowane.
+  min_score: 55
+  # Cena symboliczna - poniżej niej nawet "przestarzały" sprzęt jest przepuszczany.
+  symbolic_price: 150
+  # Wyklucz sprzedawców biznesowych (sklepy)? Zwykle komisy zawyżają ceny.
+  exclude_business: false
+  # Globalna lista wykluczeń (tytuł/opis).
+  exclude_keywords: ["uszkodzon", "na części", "nie działa", "zablokowan", "bios lock", "replika"]
+
+llm:
+  enabled: true
+  model: claude-opus-5-5
+  effort: medium
+  # Maksymalna liczba ofert analizowanych przez LLM w jednym skanie (kontrola kosztów).
+  max_offers_per_run: 8
+  # Minimalny werdykt (1-10) z analizy LLM, żeby wysłać powiadomienie.
+  notify_min_verdict: 6
+
+ntfy:
+  server: https://ntfy.sh
+  topic: ""            # ustaw przez NTFY_TOPIC
+  token: ""            # opcjonalnie, przez NTFY_TOKEN
+  # Priorytet ntfy: 1 (min) - 5 (max). Werdykt >= 8 dostaje urgent (5), reszta high (4).
+  priority_default: 4
+  priority_urgent: 5
+  # Wyślij raport zbiorczy po skanie, nawet jeśli nic nie znaleziono (do debugowania).
+  send_summary: false
+
+state:
+  path: .olx_hunter_state.json
+  # Ponownie powiadamiaj o znanej ofercie, jeśli cena spadła o co najmniej tyle procent.
+  price_drop_pct: 10

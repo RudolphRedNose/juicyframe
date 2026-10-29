@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "olx-hunter"
+version = "0.1.0"
+description = "Łowca okazji na OLX: heurystyka + analiza Claude + powiadomienia ntfy"
+requires-python = ">=3.10"
+dependencies = ["anthropic>=2.3.0", "requests>=2.32", "PyYAML>=6.0"]
+
+[project.scripts]
+olx-hunter = "olx_hunter.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["olx_hunter*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

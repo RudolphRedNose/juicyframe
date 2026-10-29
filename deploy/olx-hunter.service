@@ -1,0 +1,9 @@
+[Unit]
+Description=OLX Hunter - skan okazji
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/olx-hunter
+EnvironmentFile=/opt/olx-hunter/.env
+ExecStart=/opt/olx-hunter/.venv/bin/python -m olx_hunter scan

@@ -1,0 +1,42 @@
+# Skan OLX co 30 minut na GitHub Actions.
+# UWAGA: OLX (CloudFront) często blokuje IP centrów danych (w tym runnery GitHub, 403).
+# Jeśli job kończy się błędem "OLX zwrócił 403", uruchamiaj skaner lokalnie / na self-hosted runnerze
+# w Polsce (patrz README, sekcja "Uruchamianie cyklicznie").
+name: OLX scan
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ${{ vars.OLX_RUNNER || 'ubuntu-latest' }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Przywróć pamięć widzianych ofert
+        uses: actions/cache/restore@v4
+        with:
+          path: .olx_hunter_state.json
+          key: olx-state-${{ github.run_id }}
+          restore-keys: olx-state-
+      - name: Skan
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          NTFY_SERVER: ${{ vars.NTFY_SERVER || 'https://ntfy.sh' }}
+          NTFY_TOKEN: ${{ secrets.NTFY_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OLX_COOKIE: ${{ secrets.OLX_COOKIE }}
+        run: python -m olx_hunter scan
+      - name: Zapisz pamięć widzianych ofert
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .olx_hunter_state.json
+          key: olx-state-${{ github.run_id }}

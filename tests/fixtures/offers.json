@@ -1,0 +1,96 @@
+{
+  "data": [
+    {
+      "id": 900000001,
+      "url": "https://www.olx.pl/d/oferta/lenovo-thinkcentre-m920q-i5-8500t-16gb-512gb-nvme-CID99-ID1aaaaa.html",
+      "title": "Lenovo ThinkCentre M920q Tiny i5-8500T 16GB 512GB NVMe Win11",
+      "description": "Sprzęt poleasingowy, stan bardzo dobry. W zestawie oryginalny zasilacz 65W. Faktura VAT 23%, gwarancja 6 miesięcy. Możliwy odbiór osobisty lub przesyłka OLX.",
+      "created_time": "2026-10-28T10:00:00+02:00",
+      "last_refresh_time": "2026-10-29T09:00:00+02:00",
+      "business": true,
+      "params": [
+        {"key": "price", "name": "Cena", "type": "price", "value": {"value": 450, "currency": "PLN", "negotiable": true}},
+        {"key": "state", "name": "Stan", "type": "select", "value": {"key": "used", "label": "Używane"}},
+        {"key": "ram", "name": "Pamięć RAM", "type": "select", "value": {"key": "16gb", "label": "16 GB"}},
+        {"key": "processor", "name": "Procesor", "type": "select", "value": {"key": "i5", "label": "Intel Core i5"}}
+      ],
+      "user": {"id": 1, "name": "KomputeryPoleasingowe", "created": "2019-03-01T00:00:00+01:00", "company_name": "KP sp. z o.o."},
+      "photos": [{"id": 1}, {"id": 2}, {"id": 3}, {"id": 4}],
+      "location": {"city": {"name": "Warszawa"}, "region": {"name": "Mazowieckie"}},
+      "delivery": {"rock": {"offer_id": 900000001, "active": true, "mode": "Rock"}},
+      "safedeal": {"weight": 2, "weight_grams": 2000, "allowed_quantity": [1]}
+    },
+    {
+      "id": 900000002,
+      "url": "https://www.olx.pl/d/oferta/rtx-3080-nowa-nieotwierana-CID99-ID1bbbbb.html",
+      "title": "RTX 3080 10GB nowa nieotwierana pilnie",
+      "description": "Nowa w folii, pilnie sprzedam bo wyjeżdżam za granicę. Tylko przedpłata na konto, wysyłka kurierem. Kontakt WhatsApp.",
+      "created_time": "2026-10-29T08:00:00+02:00",
+      "last_refresh_time": "2026-10-29T08:00:00+02:00",
+      "business": false,
+      "params": [
+        {"key": "price", "name": "Cena", "type": "price", "value": {"value": 500, "currency": "PLN", "negotiable": false}},
+        {"key": "state", "name": "Stan", "type": "select", "value": {"key": "new", "label": "Nowe"}}
+      ],
+      "user": {"id": 2, "name": "Adam", "created": "2026-10-29T07:30:00+02:00"},
+      "photos": [{"id": 1}],
+      "location": {"city": {"name": "Kraków"}, "region": {"name": "Małopolskie"}},
+      "delivery": {"rock": {"active": false}},
+      "safedeal": {}
+    },
+    {
+      "id": 900000003,
+      "url": "https://www.olx.pl/d/oferta/serwer-xeon-e5-2680-v3-CID99-ID1ccccc.html",
+      "title": "Komputer Xeon E5-2680 v3 32GB DDR4 GTX 970",
+      "description": "Mocny komputer do gier i pracy, 12 rdzeni. Działa bez zarzutu. Odbiór osobisty.",
+      "created_time": "2026-10-27T10:00:00+02:00",
+      "last_refresh_time": "2026-10-29T10:00:00+02:00",
+      "business": false,
+      "params": [
+        {"key": "price", "name": "Cena", "type": "price", "value": {"value": 900, "currency": "PLN", "negotiable": true}},
+        {"key": "state", "name": "Stan", "type": "select", "value": {"key": "used", "label": "Używane"}}
+      ],
+      "user": {"id": 3, "name": "Marek", "created": "2021-05-01T00:00:00+02:00"},
+      "photos": [{"id": 1}, {"id": 2}],
+      "location": {"city": {"name": "Poznań"}, "region": {"name": "Wielkopolskie"}},
+      "delivery": {"rock": {"active": false}},
+      "safedeal": {}
+    },
+    {
+      "id": 900000004,
+      "url": "https://www.olx.pl/d/oferta/dell-optiplex-7080-micro-bez-zasilacza-CID99-ID1ddddd.html",
+      "title": "Dell OptiPlex 7080 Micro i5-10500T 8GB bez dysku i bez zasilacza",
+      "description": "Sprzedam jednostkę Dell 7080 micro, bez dysku i bez zasilacza (zgubiony). RAM 8GB. Bez gwarancji.",
+      "created_time": "2026-10-29T06:00:00+02:00",
+      "last_refresh_time": "2026-10-29T06:00:00+02:00",
+      "business": false,
+      "params": [
+        {"key": "price", "name": "Cena", "type": "price", "value": {"value": 850, "currency": "PLN", "negotiable": false}},
+        {"key": "state", "name": "Stan", "type": "select", "value": {"key": "used", "label": "Używane"}}
+      ],
+      "user": {"id": 4, "name": "Tomek", "created": "2023-01-10T00:00:00+01:00"},
+      "photos": [{"id": 1}, {"id": 2}, {"id": 3}],
+      "location": {"city": {"name": "Gdańsk"}, "region": {"name": "Pomorskie"}},
+      "delivery": {"rock": {"active": true}},
+      "safedeal": {"allowed_quantity": [1]}
+    },
+    {
+      "id": 900000005,
+      "url": "https://www.olx.pl/d/oferta/mini-pc-n100-16gb-CID99-ID1eeeee.html",
+      "title": "Mini PC Intel N100 16GB 512GB nowy",
+      "description": "Nowy mini pc z Chin, N100, 16GB RAM, 512GB SSD. Windows 11.",
+      "created_time": "2026-10-29T06:00:00+02:00",
+      "last_refresh_time": "2026-10-29T06:00:00+02:00",
+      "business": false,
+      "params": [
+        {"key": "price", "name": "Cena", "type": "price", "value": {"value": 120, "currency": "PLN", "negotiable": false}},
+        {"key": "state", "name": "Stan", "type": "select", "value": {"key": "new", "label": "Nowe"}}
+      ],
+      "user": {"id": 5, "name": "Ola", "created": "2022-01-10T00:00:00+01:00"},
+      "photos": [{"id": 1}, {"id": 2}],
+      "location": {"city": {"name": "Łódź"}, "region": {"name": "Łódzkie"}},
+      "delivery": {"rock": {"active": true}},
+      "safedeal": {"allowed_quantity": [1]}
+    }
+  ]
+}

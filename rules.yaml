@@ -1,0 +1,240 @@
+# Baza wiedzy heurystyki. Ceny w PLN, orientacyjne dla rynku wtórnego w Polsce (2026).
+# fair  = typowa cena używanego egzemplarza w dobrym stanie
+# good  = cena, poniżej której to okazja
+# scam  = cena, poniżej której oferta jest podejrzanie tania (czerwona flaga)
+# Pierwsze pasujące (regex, case-insensitive, po tytule+opisie) wygrywa - kolejność ma znaczenie.
+
+reference_prices:
+  # --- Mini PC z leasingu ---
+  - pattern: "m90q.*(gen ?3|i7-?11)|m90q.*gen ?3"
+    label: "Lenovo M90q Gen 3 (12 gen)"
+    fair: 1500
+    good: 1150
+    scam: 600
+  - pattern: "m90q|m80q|m70q gen ?2|m920x"
+    label: "Lenovo M90q/M80q/M920x (9-10 gen, 65W)"
+    fair: 1000
+    good: 750
+    scam: 350
+  - pattern: "m920q|m720q|m70q|m75q"
+    label: "Lenovo M720q/M920q Tiny (8-9 gen)"
+    fair: 650
+    good: 480
+    scam: 220
+  - pattern: "m710q|m910q|m715q"
+    label: "Lenovo M710q/M910q Tiny (6-7 gen)"
+    fair: 380
+    good: 280
+    scam: 120
+  - pattern: "optiplex.*(7090|7080|3090|3080).*micro|micro.*(7090|7080|3090|3080)"
+    label: "Dell OptiPlex 7080/7090 Micro (10-11 gen)"
+    fair: 1050
+    good: 800
+    scam: 380
+  - pattern: "optiplex.*(7070|3070|5070).*micro|micro.*(7070|3070|5070)"
+    label: "Dell OptiPlex 7070/3070 Micro (9 gen)"
+    fair: 700
+    good: 520
+    scam: 240
+  - pattern: "optiplex.*(7060|3060|5060).*micro|micro.*(7060|3060|5060)"
+    label: "Dell OptiPlex 7060/3060 Micro (8 gen)"
+    fair: 600
+    good: 450
+    scam: 200
+  - pattern: "elitedesk.*800.*g6|800 g6"
+    label: "HP EliteDesk 800 G6 Mini (10 gen)"
+    fair: 950
+    good: 720
+    scam: 350
+  - pattern: "elitedesk.*800.*g5|800 g5"
+    label: "HP EliteDesk 800 G5 Mini (9 gen)"
+    fair: 700
+    good: 520
+    scam: 240
+  - pattern: "elitedesk.*800.*g4|800 g4|prodesk.*600.*g4"
+    label: "HP EliteDesk 800 G4 Mini (8 gen)"
+    fair: 600
+    good: 450
+    scam: 200
+
+  # --- Procesory ---
+  - pattern: "i5-? ?14600k|i5-? ?13600k"
+    label: "Core i5-13600K/14600K"
+    fair: 850
+    good: 680
+    scam: 300
+  - pattern: "i7-? ?12700k?|i7-? ?13700"
+    label: "Core i7-12700/13700"
+    fair: 850
+    good: 650
+    scam: 300
+  - pattern: "i5-? ?12600k"
+    label: "Core i5-12600K"
+    fair: 600
+    good: 470
+    scam: 200
+  - pattern: "i5-? ?12400f?|i5-? ?13400f?"
+    label: "Core i5-12400/13400"
+    fair: 420
+    good: 330
+    scam: 150
+  - pattern: "ryzen 7 ?5800x3d|5800x3d"
+    label: "Ryzen 7 5800X3D"
+    fair: 850
+    good: 700
+    scam: 350
+  - pattern: "ryzen 7 ?7700x?|ryzen 5 ?7600x?"
+    label: "Ryzen 5 7600 / Ryzen 7 7700 (AM5)"
+    fair: 750
+    good: 580
+    scam: 250
+  - pattern: "ryzen 7 ?5700x|ryzen 7 ?5800x"
+    label: "Ryzen 7 5700X/5800X"
+    fair: 550
+    good: 430
+    scam: 180
+  - pattern: "ryzen 5 ?5600x?|ryzen 5 ?5500"
+    label: "Ryzen 5 5600/5600X"
+    fair: 380
+    good: 300
+    scam: 130
+
+  # --- Karty graficzne ---
+  - pattern: "rtx ?4070"
+    label: "RTX 4070"
+    fair: 1900
+    good: 1600
+    scam: 800
+  - pattern: "rtx ?3080"
+    label: "RTX 3080"
+    fair: 1500
+    good: 1200
+    scam: 600
+  - pattern: "rtx ?3070 ?ti"
+    label: "RTX 3070 Ti"
+    fair: 1250
+    good: 1000
+    scam: 500
+  - pattern: "rtx ?3070"
+    label: "RTX 3070"
+    fair: 1100
+    good: 900
+    scam: 450
+  - pattern: "rtx ?3060 ?ti"
+    label: "RTX 3060 Ti"
+    fair: 950
+    good: 780
+    scam: 380
+  - pattern: "rtx ?3060"
+    label: "RTX 3060 12GB"
+    fair: 800
+    good: 650
+    scam: 300
+  - pattern: "rx ?6800 ?xt"
+    label: "RX 6800 XT"
+    fair: 1400
+    good: 1150
+    scam: 550
+  - pattern: "rx ?6700 ?xt"
+    label: "RX 6700 XT"
+    fair: 950
+    good: 780
+    scam: 380
+
+  # --- Audio / wideo ---
+  - pattern: "sm7b"
+    label: "Shure SM7B"
+    fair: 1400
+    good: 1150
+    scam: 550
+  - pattern: "procaster"
+    label: "Rode Procaster"
+    fair: 650
+    good: 520
+    scam: 250
+  - pattern: "cam link 4k"
+    label: "Elgato Cam Link 4K"
+    fair: 350
+    good: 270
+    scam: 120
+  - pattern: "zv-?e10"
+    label: "Sony ZV-E10"
+    fair: 2300
+    good: 1900
+    scam: 900
+
+# Wzorce oznaczające przestarzałą / wykastrowaną architekturę. Odrzucane, chyba że cena <= symbolic_price.
+obsolete_patterns:
+  - "xeon e5-? ?26\\d\\d ?v[123]\\b"   # Xeon E5 v1-v3 (2012-2014)
+  - "xeon e3-? ?12\\d\\d ?v[1-5]?\\b"
+  - "xeon x5\\d{3}|xeon e5\\d{3}\\b"   # Westmere/Nehalem
+  - "\\bceleron\\b"
+  - "\\bpentium\\b"
+  - "\\batom\\b"
+  - "\\bcore ?2 ?(duo|quad)\\b"
+  - "\\bi[357]-? ?[2-6]\\d{3}[a-z]{0,2}\\b"   # Core 2-6 gen (Sandy Bridge - Skylake)
+  - "\\bi[357]-? ?[2-6]\\d{2}[a-z]?\\b"       # Core 1 gen (i5-750 itp.)
+  - "\\bathlon\\b|\\bphenom\\b|\\bfx-? ?[4689]\\d{3}\\b"
+  - "\\bgtx ?(7|9)\\d0\\b|\\bgtx ?10[35]0\\b"  # Kepler/Maxwell, GTX 1030/1050
+  - "\\bddr3\\b"
+  - "\\bn100\\b|\\bn95\\b|\\bn5095\\b|\\bj4125\\b|\\bj4105\\b"   # budżetowe mini PC
+
+# Ukryte koszty - gdy wzorzec pasuje, dopisujemy ostrzeżenie i obniżamy wynik.
+hidden_costs:
+  - pattern: "bez zasilacza|brak zasilacza|bez zasilania"
+    note: "Brak zasilacza - dolicz 60-150 zł (Tiny/Micro wymagają dedykowanego zasilacza)."
+    penalty: 10
+  - pattern: "bez dysku|brak dysku|bez ssd|brak ssd|bez hdd"
+    note: "Brak dysku - dolicz 100-250 zł za NVMe."
+    penalty: 8
+  - pattern: "bez ram|brak ram|bez pamięci|brak pamięci|bez pamieci"
+    note: "Brak RAM - dolicz 100-300 zł (SO-DIMM DDR4) lub więcej przy DDR5."
+    penalty: 10
+  - pattern: "\\bddr5\\b"
+    note: "Platforma DDR5 - sprawdź, czy RAM jest w zestawie; dokupienie jest drogie."
+    penalty: 3
+  - pattern: "bez gwarancji|brak gwarancji|po gwarancji"
+    note: "Brak gwarancji - ryzyko po stronie kupującego."
+    penalty: 4
+  - pattern: "bez systemu|brak systemu|bez windows|brak licencji"
+    note: "Brak licencji Windows - istotne tylko, jeśli nie planujesz Linuksa."
+    penalty: 0
+  - pattern: "tylko odbiór|tylko odbior|bez wysyłki|bez wysylki"
+    note: "Tylko odbiór osobisty - sprawdź lokalizację."
+    penalty: 3
+  - pattern: "\\bvpro\\b|hasło bios|haslo bios|zablokowany bios"
+    note: "Możliwa blokada BIOS / vPro - sprawdź, czy BIOS jest odblokowany."
+    penalty: 8
+
+# Frazy sugerujące oszustwo (przedpłata poza OLX, kontakt poza platformą).
+scam_phrases:
+  - pattern: "tylko przedpłata|tylko przedplata|przedpłata na konto|przelew z góry"
+    note: "Wymusza przedpłatę poza OLX."
+    penalty: 25
+  - pattern: "whatsapp|telegram|pisz na maila|kontakt mail"
+    note: "Przenosi kontakt poza OLX."
+    penalty: 15
+  - pattern: "pilnie|pilna sprzedaż|wyjazd za granicę|wyjezdzam"
+    note: "Presja czasu - typowy element scamu."
+    penalty: 8
+  - pattern: "nieotwieran|nie otwieran|folia|zaplombowan"
+    note: "\"Nieotwierane\" przy niskiej cenie = częsty scam na nowy sprzęt."
+    penalty: 5
+
+# Dodatnie sygnały jakości.
+positive_signals:
+  - pattern: "faktur|fv 23|na firmę|vat 23"
+    note: "Faktura VAT - zwykle sprzęt poleasingowy od firmy."
+    bonus: 5
+  - pattern: "gwarancj"
+    note: "Deklarowana gwarancja."
+    bonus: 4
+  - pattern: "nvme|ssd"
+    note: "Dysk SSD w zestawie."
+    bonus: 2
+  - pattern: "\\b(16|32|64) ?gb\\b"
+    note: "Sensowna ilość RAM."
+    bonus: 3
+  - pattern: "poleasingow|leasing|korporac"
+    note: "Sprzęt poleasingowy - zwykle dobry stan."
+    bonus: 3
