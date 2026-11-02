@@ -66,7 +66,8 @@ def run_scan(cfg: Config, use_llm: bool = True, dry_run: bool = False, fixture: 
     notify_min_verdict = int(cfg.llm.get("notify_min_verdict", 6))
     max_llm = int(cfg.llm.get("max_offers_per_run", 8))
     price_drop_pct = float(cfg.state.get("price_drop_pct", 10))
-    max_age_hours = float(cfg.olx.get("max_age_hours", 0) or 0)
+    # Fixture to statyczny zrzut - filtr świeżości zależny od bieżącej daty go nie dotyczy.
+    max_age_hours = 0.0 if fixture else float(cfg.olx.get("max_age_hours", 0) or 0)
 
     stats = {"fetched": 0, "rejected": 0, "below_threshold": 0, "seen": 0, "analyzed": 0, "notified": 0, "errors": 0}
     reports: list[str] = []
@@ -199,20 +200,22 @@ def main(argv: Optional[list[str]] = None) -> int:
     parser.add_argument("--config", help="ścieżka do config.yaml")
     parser.add_argument("--rules", help="ścieżka do rules.yaml")
     parser.add_argument("-v", "--verbose", action="store_true")
+    common = argparse.ArgumentParser(add_help=False)
+    common.add_argument("-v", "--verbose", action="store_true", default=argparse.SUPPRESS)
     sub = parser.add_subparsers(dest="cmd", required=True)
 
-    p_scan = sub.add_parser("scan", help="przeskanuj wszystkie wyszukiwania z config.yaml")
+    p_scan = sub.add_parser("scan", parents=[common], help="przeskanuj wszystkie wyszukiwania z config.yaml")
     p_scan.add_argument("--no-llm", action="store_true", help="tylko heurystyka, bez Claude")
     p_scan.add_argument("--dry-run", action="store_true", help="nie wysyłaj ntfy, tylko wypisz")
     p_scan.add_argument("--fixture", help="plik JSON z ofertami (format API OLX) zamiast sieci")
     p_scan.add_argument("--force", action="store_true", help="ignoruj pamięć widzianych ofert")
 
-    p_an = sub.add_parser("analyze", help="przeanalizuj jedną ofertę (URL, id lub plik JSON)")
+    p_an = sub.add_parser("analyze", parents=[common], help="przeanalizuj jedną ofertę (URL, id lub plik JSON)")
     p_an.add_argument("target")
     p_an.add_argument("--no-llm", action="store_true")
     p_an.add_argument("--notify", action="store_true", help="wyślij też na ntfy")
 
-    p_test = sub.add_parser("test-notify", help="wyślij testowe powiadomienie ntfy")
+    p_test = sub.add_parser("test-notify", parents=[common], help="wyślij testowe powiadomienie ntfy")
     p_test.add_argument("--message", default="OLX Hunter działa. To jest test kanału ntfy.")
 
     args = parser.parse_args(argv)

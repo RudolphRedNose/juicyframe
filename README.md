@@ -38,7 +38,7 @@ pip install -r requirements.txt
 cp .env.example .env            # uzupełnij NTFY_TOPIC i ANTHROPIC_API_KEY
 
 python -m olx_hunter test-notify                       # test kanału ntfy
-python -m olx_hunter scan --dry-run --no-llm -v        # sucha próba, sama heurystyka
+python -m olx_hunter -v scan --dry-run --no-llm        # sucha próba, sama heurystyka
 python -m olx_hunter scan                              # pełny skan + Claude + push
 python -m olx_hunter analyze "https://www.olx.pl/d/oferta/...html"   # jedna oferta
 python -m olx_hunter scan --fixture tests/fixtures/offers.json --dry-run --no-llm  # offline

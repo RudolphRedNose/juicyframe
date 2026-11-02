@@ -64,7 +64,9 @@ class Offer:
     def seller_age_days(self) -> Optional[float]:
         if not self.seller_since:
             return None
-        return (datetime.now(timezone.utc) - self.seller_since).total_seconds() / 86400
+        # Wiek konta w chwili wystawienia oferty (konto założone tuż przed ogłoszeniem = sygnał scamu).
+        ref = self.created_at or datetime.now(timezone.utc)
+        return max(0.0, (ref - self.seller_since).total_seconds() / 86400)
 
     @classmethod
     def from_api(cls, data: dict[str, Any]) -> "Offer":

@@ -1,8 +1,9 @@
 """Klient nieoficjalnego API OLX (to samo, z którego korzysta strona www).
 
 Endpoint: GET https://www.olx.pl/api/v1/offers/?query=...&offset=...&limit=40
-Uwaga: OLX (CloudFront) blokuje ruch z części adresów IP centrów danych. Skaner należy
-uruchamiać z polskiego / domowego IP (komputer, Raspberry Pi, VPS w PL).
+Uwaga: OLX (CloudFront) blokuje ruch z części adresów IP centrów danych oraz klientów HTTP
+o "nieprzeglądarkowym" odcisku TLS (requests/curl dostają 403 nawet z domowego IP).
+Dlatego domyślnie używamy curl_cffi z impersonacją Chrome; bez niego - zwykłe requests.
 """
 
 from __future__ import annotations
@@ -15,9 +16,26 @@ from typing import Any, Iterator, Optional
 
 import requests
 
+try:
+    from curl_cffi import requests as cffi_requests
+except ImportError:  # pragma: no cover - opcjonalna zależność
+    cffi_requests = None
+
 from .models import Offer
 
 log = logging.getLogger(__name__)
+
+NET_ERRORS: tuple[type[BaseException], ...] = (requests.RequestException,)
+if cffi_requests is not None:
+    NET_ERRORS += (cffi_requests.RequestsError,)
+
+
+def _default_session() -> Any:
+    if cffi_requests is not None and os.environ.get("OLX_IMPERSONATE", "chrome") not in ("", "0"):
+        return cffi_requests.Session(impersonate=os.environ.get("OLX_IMPERSONATE", "chrome"))
+    s = requests.Session()
+    s.headers["User-Agent"] = USER_AGENT
+    return s
 
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -39,9 +57,9 @@ class OlxClient:
         self.base_url = base_url.rstrip("/")
         self.request_delay = request_delay
         self.timeout = timeout
-        self.session = session or requests.Session()
+        self.session = session or _default_session()
+        # User-Agent ustawia impersonacja (musi pasować do odcisku TLS) albo _default_session.
         self.session.headers.update({
-            "User-Agent": USER_AGENT,
             "Accept": "application/json, text/plain, */*",
             "Accept-Language": "pl-PL,pl;q=0.9,en;q=0.8",
             "Referer": f"{self.base_url}/",
@@ -64,7 +82,7 @@ class OlxClient:
         for attempt in range(3):
             try:
                 resp = self.session.get(url, params=params, timeout=self.timeout)
-            except requests.RequestException as exc:
+            except NET_ERRORS as exc:
                 if attempt == 2:
                     raise OlxError(f"Błąd sieci przy {url}: {exc}") from exc
                 time.sleep(2 ** attempt)
